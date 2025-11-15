@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain_core.runnables import RunnableSequence
 from langchain_deepseek import ChatDeepSeek
 from langchain_classic.memory import ConversationBufferWindowMemory
-from langchain_classic.chains import LLMChain
+# from langchain_classic.chains import LLMChain
 from langchain_classic.prompts import ChatPromptTemplate
 
 load_dotenv(override=True)
