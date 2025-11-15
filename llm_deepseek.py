@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from langchain_core.runnables import RunnableSequence
 from langchain_deepseek import ChatDeepSeek
 from langchain_classic.memory import ConversationBufferWindowMemory
 from langchain_classic.chains import LLMChain
@@ -20,8 +21,10 @@ prompt = ChatPromptTemplate.from_messages([
     ("human", "{question}")
 ])
 
-conversation_chain = LLMChain(llm=llm, prompt=prompt, memory=memory)
+# conversation_chain = LLMChain(llm=llm, prompt=prompt, memory=memory)
+conversation_chain = RunnableSequence(prompt | llm)
+
 
 def get_deepseek_answer(question: str) -> str:
     """返回 DeepSeek 回答"""
-    return conversation_chain.run({"question": question})
+    return conversation_chain.invoke({"question": question})
